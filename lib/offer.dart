@@ -1,6 +1,3 @@
-import 'user.dart';
-import 'asset.dart';
-
 class Offer {
   User _user;
   Asset asset;

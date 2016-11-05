@@ -1,6 +1,3 @@
-import 'user.dart';
-import 'offer.dart';
-
 class Contract {
   int sellerId, buyerId, offerToBuyId, offerToSellId;
   bool sellerConfirm, buyerConfirm;
