@@ -1,5 +1,8 @@
+import 'user.dart';
+import 'asset.dart';
+
 class Offer {
-  int user_id, asset_id;
-  double quantity;
-  Offer(this.user_id, this.asset_id, this.quantity);
+  int userId, assetId;
+  num quantity;
+  Offer(this.userId, this.assetId, this.quantity);
 }
