@@ -9,9 +9,7 @@ class Contract {
 
   String changeStatus(sellerConfirm, buyerConfirm) {
     if (sellerConfirm && buyerConfirm) {
-      status = 'approved';
-    } else {
-      status = 'is not approved';
+      status = 'closed';
     }
   }
 }

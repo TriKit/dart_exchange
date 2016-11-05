@@ -1,6 +1,33 @@
 class User {
-  int id;
   String name, email, password;
-  List assets;
-  User(this.id, this.name, this.email, this.password, this.assets);
+  Map associations = {
+    "balances" : [],
+    "offers" : [],
+    "contracts" : []
+  };
+
+  get balances => associations['balances'];
+  get offers => associations['offers'];
+  get contracts => associations['contracts'];
+
+  User(this.name, this.email, this.password);
+
+  void addBalance(Balance balance) {
+    _addAssociation('balances', object);
+  }
+
+  void addOffer(Offer offer) {
+    _addAssociation('offers', object);
+  }
+
+  void addContract(Contract offer) {
+    _addAssociation('contracts', object);
+  }
+
+  void _addAssociation(String name, object) {
+    associations[name].add(object);
+    object.setAssociation(name, this);
+  }
 }
+
+//setAssociation
