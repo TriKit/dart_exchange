@@ -1,5 +1,5 @@
 class Asset {
-  String code, name;
-  Asset(this.code, this.name);
-  toString() => "$code $name";
+  String code, description;
+  Asset(this.code, this.description);
+  toString() => "$code $description";
 }
