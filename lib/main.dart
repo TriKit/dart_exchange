@@ -17,9 +17,12 @@ main() {
   // print(user.balances);
 
   var offer = new Offer();
-  offer.asset = new Asset('rub', 'russian federation rubl');
+  offer.proposed_asset = new Asset('rub', 'russian federation rubl');
+  offer.proposed_amount = 64;
+  offer.wish_asset = new Asset('usd', 'united states dollar');
+  offer.wish_amount = 1;
   offer.user = user;
-  offer.amount = 1000;
-  print(offer.user.name);
-  print(offer.amount);
+  print(offer);
+  // print(offer.user.name);
+  // print(offer.amount);
 }
