@@ -7,7 +7,7 @@ import 'balance.dart';
 main() {
   // Users
   var seller = new User('Ivan', 'ivan@gmail.com', 'secret');
-  var buyer = new User('Jhon', 'jhon@gmail.com', 'secret');
+  var buyer = new User('John', 'john@gmail.com', 'secret');
 
   // add 100 dollars to seller balance
   var seller_dollar_balance = new Balance();
@@ -20,7 +20,6 @@ main() {
   buyer_rub_balance.asset = new Asset('rub', 'russian federation rubl');
   buyer_rub_balance.amount = 10000;
   buyer_rub_balance.user = buyer;
-  print("${buyer.balances[0].asset.code}");
 
   // Offer from seller to sell 50 dollars for 3000 rubles
   var offer = new Offer();
@@ -36,6 +35,7 @@ main() {
     contract.offer_to_sell = offer;
     contract.seller = seller;
     contract.buyer =  buyer;
-    // add to seller balance 50 dollars
+    contract.increaseSellerBalance();
+    contract.increaseBuyerBalance();
   };
 }
