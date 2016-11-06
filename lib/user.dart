@@ -28,6 +28,16 @@ class User {
     associations[name].add(object);
     object.setAssociation(name, this);
   }
+
+  getBalanceByCode(code) {
+    for (var balance in associations['balances']) {
+      if (code == balance.asset.code) {
+        return code;
+      } else {
+        return null;
+      }
+    }
+  }
 }
 
 //setAssociation
