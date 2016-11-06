@@ -1,12 +1,20 @@
 class Offer {
-  User _user;
   Asset asset;
   num amount;
-  Offer(this.user, this.asset, this.amount);
+  Map belongs_to = {
+    'user' : null
+  };
 
-  get user => _user;
+  get user {
+    return belongs_to['user'];
+  }
+
   set user(u) {
-    _user = u;
-    _user.offers.add(this);
+    setAssociation('user', u);
+    u.offers.add(this);
+  }
+
+  void setAssociation(String name, object) {
+    belongs_to[name] = object;
   }
 }
