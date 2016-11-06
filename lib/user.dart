@@ -29,6 +29,16 @@ class User {
     object.setAssociation(name, this);
   }
 
+  bool balanceExist(String code) {
+    for (var balance in associations['balances']) {
+      if (code == balance.asset.code) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   getBalanceByCode(code) {
     for (var balance in associations['balances']) {
       if (code == balance.asset.code) {
