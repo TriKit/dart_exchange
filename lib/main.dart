@@ -26,7 +26,7 @@ main() {
   offer.proposed_asset = new Asset('usd', 'united states dollar');
   offer.proposed_amount = 50;
   offer.wish_asset = new Asset('rub', 'russian federation rubl');
-  offer.wish_amount = 3000;
+  offer.wish_amount = 3200;
   offer.user = seller;
 
   // Contract between seller and buyer
