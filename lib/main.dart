@@ -5,24 +5,37 @@ import 'contract.dart';
 import 'balance.dart';
 
 main() {
-  var user = new User('Ivan', 'ivan@gmail.com', 'secret');
+  // Users
+  var seller = new User('Ivan', 'ivan@gmail.com', 'secret');
+  var buyer = new User('Jhon', 'jhon@gmail.com', 'secret');
 
-  var user2 = new User('Ivan', 'ivan@gmail.com', 'secret');
+  // add 100 dollars to seller balance
+  var seller_dollar_balance = new Balance();
+  seller_dollar_balance.asset = new Asset('usd', 'united states dollar');
+  seller_dollar_balance.amount = 100;
+  seller_dollar_balance.user = seller;
 
-  var balance1 = new Balance();
-  balance1.asset = new Asset('usd', 'united states dollar');
+  // add 10.000 rubles to buyer balance
+  var buyer_rub_balance = new Balance();
+  buyer_rub_balance.asset = new Asset('rub', 'russian federation rubl');
+  buyer_rub_balance.amount = 10000;
+  buyer_rub_balance.user = buyer;
+  print("${buyer.balances[0].asset.code}");
 
-  // balance1.user = user;
-  // print(balance1.user);
-  // print(user.balances);
-
+  // Offer from seller to sell 50 dollars for 3000 rubles
   var offer = new Offer();
-  offer.proposed_asset = new Asset('rub', 'russian federation rubl');
-  offer.proposed_amount = 64;
-  offer.wish_asset = new Asset('usd', 'united states dollar');
-  offer.wish_amount = 1;
-  offer.user = user;
-  print(offer);
-  // print(offer.user.name);
-  // print(offer.amount);
+  offer.proposed_asset = new Asset('usd', 'united states dollar');
+  offer.proposed_amount = 50;
+  offer.wish_asset = new Asset('rub', 'russian federation rubl');
+  offer.wish_amount = 3000;
+  offer.user = seller;
+
+  // Contract between seller and buyer
+  if (offer.wish_asset.code == buyer_rub_balance.asset.code && offer.wish_amount <= buyer_rub_balance.amount) {
+    var contract = new Contract();
+    contract.offer_to_sell = offer;
+    contract.seller = seller;
+    contract.buyer =  buyer;
+    // add to seller balance 50 dollars
+  };
 }
