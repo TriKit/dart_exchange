@@ -2,4 +2,4 @@ name: Exchange
 version: 0.0.1
 description: First dart app
 dependencies:
-  unittest: any
+  test:
