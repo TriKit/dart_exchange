@@ -42,7 +42,7 @@ class User {
   getBalanceByCode(code) {
     for (var balance in associations['balances']) {
       if (code == balance.asset.code) {
-        print(balance);
+        return balance;
       } else {
         return null;
       }
