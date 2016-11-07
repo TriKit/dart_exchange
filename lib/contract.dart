@@ -2,22 +2,22 @@ import 'balance.dart';
 import 'asset.dart';
 
 class Contract {
-  Offer offer_to_sell;
+  Offer offer;
   Map belongs_to = {
-    'seller' : null,
-    'buyer'  : null
+    "seller" : null,
+    "buyer"  : null
   };
 
-  get seller => belongs_to['seller'];
-  get buyer => belongs_to['buyer'];
+  get seller => belongs_to["seller"];
+  get buyer => belongs_to["buyer"];
 
   set seller(s) {
-    setAssociation('seller', s);
+    setAssociation("seller", s);
     s.contracts.add(this);
   }
 
   set buyer(b) {
-    setAssociation('buyer', b);
+    setAssociation("buyer", b);
     b.contracts.add(this);
   }
 
@@ -25,64 +25,49 @@ class Contract {
     belongs_to[name] = object;
   }
 
-
-  void increaseSellerBalance() {
-    for (var balance in belongs_to['seller'].balances) {
-      if (balance.asset.code == offer_to_sell.wish_asset.code) {
-        balance.amount += offer_to_sell.wish_amount;
-        print("${belongs_to['seller'].name}s ${offer_to_sell.wish_asset.code} balance increased by ${offer_to_sell.wish_amount}");
-        decreaseSellerBalance();
-        break;
-      } else {
-        var new_balance = new Balance();
-        new_balance.asset = new Asset(offer_to_sell.wish_asset.code, offer_to_sell.wish_asset.description);
-        new_balance.amount = offer_to_sell.wish_amount;
-        new_balance.user = this.belongs_to['seller'];
-        print("${belongs_to['seller'].name}s ${offer_to_sell.wish_asset.code} balance created and increased by ${offer_to_sell.wish_amount}");
-        decreaseSellerBalance();
-        break;
-      }
+  void updateBalances() {
+    // Show initial users data
+    print(this.belongs_to["seller"].associations['balances']);
+    print(this.belongs_to["buyer"].associations['balances']);
+    print(offer);
+    print("----------------------------");
+    // Increase seller wished balance
+      // if wished balance exists
+    if (belongs_to["seller"].balanceExists(offer.wish_asset.code)) {
+      this.belongs_to["seller"].getBalanceByCode(offer.wish_asset).amount += offer.wish_amount;
+    } else {
+      // create new balance for seller
+      var wish_balance = new Balance();
+      wish_balance.asset = new Asset(this.offer.wish_asset.code, this.offer.wish_asset.description);
+      wish_balance.amount = this.offer.wish_amount;
+      wish_balance.user = this.belongs_to["seller"];
+      print(wish_balance);
     }
-  }
+    // Decrease seller proposed balance
+    this.belongs_to["seller"].getBalanceByCode(offer.proposed_asset.code).amount -= offer.proposed_amount;
 
-  void increaseBuyerBalance() {
-    for (var balance in belongs_to['buyer'].balances) {
-      if (balance.asset.code == offer_to_sell.proposed_asset.code) {
-        balance.amount += offer_to_sell.proposed_amout;
-        print("${belongs_to['buyer'].name}s ${offer_to_sell.proposed_asset.code} balance increased by ${offer_to_sell.proposed_amount}");
-        decreaseBuyerBalance();
-        break;
-      } else {
-        var new_balance = new Balance();
-        new_balance.asset = new Asset(offer_to_sell.wish_asset.code, offer_to_sell.wish_asset.description);
-        new_balance.amount = offer_to_sell.wish_amount;
-        new_balance.user = this.belongs_to['seller'];
-        print("${belongs_to['buyer'].name}s ${offer_to_sell.proposed_asset.code} balance created and increased by ${offer_to_sell.proposed_amount} ");
-        decreaseBuyerBalance();
-        break;
-      }
+    // Show seller balances
+    print(belongs_to["seller"].getBalanceByCode(offer.proposed_asset.code));
+    print("----------------------------");
+
+    // Increase buyer proposed balance
+      // if proposed balance exists
+    if (belongs_to["buyer"].balanceExists(offer.proposed_asset.code)) {
+      this.belongs_to["buyer"].getBalanceByCode(offer.proposed_asset.code).amount += offer.proposed_amount;
+      print(belongs_to["buyer"].getBalanceByCode(offer.proposed_asset.code).amount);
+    } else {
+      // create new balance for buyer
+      var proposed_balance = new Balance();
+      proposed_balance.asset = new Asset(offer.proposed_asset.code, offer.proposed_asset.description);
+      proposed_balance.amount = offer.proposed_amount;
+      proposed_balance.user = this.belongs_to["buyer"];
+      print(proposed_balance);
     }
-  }
+    // Decrease buyer wished balance
+    belongs_to["buyer"].getBalanceByCode(offer.wish_asset.code).amount -= offer.wish_amount;
 
-  void decreaseSellerBalance() {
-    for (var balance in belongs_to['seller'].balances) {
-      if (balance.asset.code == offer_to_sell.proposed_asset.code) {
-        balance.amount -= offer_to_sell.proposed_amount;
-        print("${belongs_to['seller'].name}s ${offer_to_sell.proposed_asset.code} balance decreased by ${offer_to_sell.proposed_amount}");
-        print(balance);
-      }
-    }
-  }
-
-
-  void decreaseBuyerBalance() {
-    for (var balance in belongs_to['buyer'].balances) {
-      if (balance.asset.code == offer_to_sell.wish_asset.code) {
-        balance.amount -= offer_to_sell.wish_amount;
-        print("${belongs_to['buyer'].name}s ${offer_to_sell.wish_asset.code} balance decreased by ${offer_to_sell.wish_amount}");
-        print(balance);
-      }
-    }
+    // Show bayer balances
+    print(belongs_to["buyer"].getBalanceByCode(offer.wish_asset.code));
   }
 
 }
