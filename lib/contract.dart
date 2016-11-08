@@ -54,7 +54,7 @@ class Contract {
       // if proposed balance exists
     if (belongs_to["buyer"].balanceExists(offer.proposed_asset.code)) {
       this.belongs_to["buyer"].getBalanceByCode(offer.proposed_asset.code).amount += offer.proposed_amount;
-      print(belongs_to["buyer"].getBalanceByCode(offer.proposed_asset.code).amount);
+      print(belongs_to["buyer"].getBalanceByCode(offer.proposed_asset.code));
     } else {
       // create new balance for buyer
       var proposed_balance = new Balance();
@@ -68,6 +68,9 @@ class Contract {
 
     // Show bayer balances
     print(belongs_to["buyer"].getBalanceByCode(offer.wish_asset.code));
+
+    print(this.belongs_to["seller"].associations['balances']);
+    print(this.belongs_to["buyer"].associations['balances']);
   }
 
 }
