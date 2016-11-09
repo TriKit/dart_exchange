@@ -1,6 +1,12 @@
 class Asset {
   String code, description;
-  Asset(this.code, this.description);
+  
+  Asset(String code, String description) {
+    this.code = code;
+    this.description = description;
+    pushNewAsset();
+  }
+
   static var assets = [];
 
   include(code) {
@@ -13,7 +19,7 @@ class Asset {
     }
   }
 
-  void pushNewAsset() {
+  pushNewAsset() {
     if (!include(this.code)) {
       assets.add(this);
     }
