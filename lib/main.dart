@@ -23,14 +23,14 @@ main() {
 
   // Offer from seller to sell 50 dollars for 3000 rubles
   var offer = new Offer();
-  offer.proposed_asset = new Asset('usd', 'united states dollar');
-  offer.proposed_amount = 40;
-  offer.wish_asset = new Asset('rub', 'russian federation rubl');
-  offer.wish_amount = 2700;
+  offer.ask = new Asset('usd', 'united states dollar');
+  offer.amount = 40;
+  offer.bid = new Asset('rub', 'russian federation rubl');
+  offer.price = 2700;
   offer.user = seller;
 
   // Contract between seller and buyer
-  if (offer.wish_asset.code == buyer_rub_balance.asset.code && offer.wish_amount <= buyer_rub_balance.amount) {
+  if (offer.bid.code == buyer_rub_balance.asset.code && offer.price <= buyer_rub_balance.amount) {
     var contract = new Contract();
     contract.offer = offer;
     contract.seller = seller;

@@ -1,8 +1,8 @@
 class Offer {
-  Asset proposed_asset;
-  Asset wish_asset;
-  num proposed_amount;
-  num wish_amount;
+  Asset ask;
+  Asset bid;
+  num amount;
+  num price;
   Map belongs_to = {
     'user' : null
   };
@@ -20,5 +20,5 @@ class Offer {
     belongs_to[name] = object;
   }
 
-  toString() => "${belongs_to['user'].name} offers $proposed_amount ${proposed_asset.code} for $wish_amount ${wish_asset.code}";
+  toString() => "${belongs_to['user'].name} offers $amount ${ask.code} for $price ${bid.code}";
 }

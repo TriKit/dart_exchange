@@ -8,10 +8,10 @@ import '../lib/balance.dart';
 void main() {
   var user = new User('Ivan', 'ivan@gmail.com', 'secret');
   var offer = new Offer();
-  offer.proposed_asset = new Asset('usd', 'united states dollar');
-  offer.proposed_amount = 50;
-  offer.wish_asset = new Asset('rub', 'russian federation rubl');
-  offer.wish_amount = 3200;
+  offer.ask = new Asset('usd', 'united states dollar');
+  offer.amount = 50;
+  offer.bid = new Asset('rub', 'russian federation rubl');
+  offer.price = 3200;
   offer.user = user;
 
   test("toString() returns text representation of the offer", (){

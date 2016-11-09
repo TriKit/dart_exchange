@@ -23,10 +23,10 @@ void main() {
 
   // Offer from seller to sell 30 dollars for 2600 rubles
   var offer = new Offer();
-  offer.proposed_asset = new Asset('usd', 'united states dollar');
-  offer.proposed_amount = 30;
-  offer.wish_asset = new Asset('rub', 'russian federation rubl');
-  offer.wish_amount = 1900;
+  offer.ask = new Asset('usd', 'united states dollar');
+  offer.amount = 30;
+  offer.bid = new Asset('rub', 'russian federation rubl');
+  offer.price = 1900;
   offer.user = seller;
 
   // Create last contract
