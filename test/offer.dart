@@ -1,20 +1,23 @@
 import "package:test/test.dart";
-import '../lib/user.dart';
-import '../lib/asset.dart';
-import '../lib/offer.dart';
-import '../lib/contract.dart';
-import '../lib/balance.dart';
+import "../lib/exchange.dart";
 
 void main() {
-  var user = new User('Ivan', 'ivan@gmail.com', 'secret');
-  var offer = new Offer();
-  offer.ask = new Asset('usd', 'united states dollar');
-  offer.amount = 50;
-  offer.bid = new Asset('rub', 'russian federation rubl');
-  offer.price = 3200;
-  offer.user = user;
+  var user, offer, balance, asset;
+  setUp(() {
+    user = new User("Ivan", "ivan@gmail.com", "secret");
+    asset = new Asset("usd", "unated states dollar");
+    balance = new Balance();
+    balance.asset = asset;
+    balance.amount = 100;
+    balance.user = user;
+    offer = new Offer(bid: "usd", ask: "rub", amount: 50, price: 3200, user: user);
+  });
 
-  test("toString() returns text representation of the offer", (){
-    expect(offer.toString(), equals("Ivan offers 50 usd for 3200 rub"));
+  test("it creates new Offer", () {
+    expect(offer.ask.code, equals("rub"));
+    expect(offer.bid.code, equals("usd"));
+    expect(offer.amount, equals(50));
+    expect(offer.price, equals(3200));
+    expect(offer.user.name, equals("Ivan"));
   });
 }
