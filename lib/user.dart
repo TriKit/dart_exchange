@@ -1,3 +1,5 @@
+part of exchange;
+
 class User {
   String name, email, password;
   Map associations = {

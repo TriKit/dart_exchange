@@ -1,5 +1,6 @@
-import 'balance.dart';
-import 'asset.dart';
+// import 'balance.dart';
+// import 'asset.dart';
+part of exchange;
 
 class Contract {
   Offer offer;

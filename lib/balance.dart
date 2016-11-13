@@ -1,3 +1,5 @@
+part of exchange;
+
 class Balance {
   Asset asset;
   num amount;
