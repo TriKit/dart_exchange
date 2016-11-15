@@ -9,6 +9,11 @@ class Contract {
     "buyer"  : null
   };
 
+  Contract({offer: null, buyer: null}) {
+    this.offer = offer;
+    this.belongs_to["buyer"] = buyer;
+  }
+
   get seller => belongs_to["seller"];
   get buyer => belongs_to["buyer"];
 
