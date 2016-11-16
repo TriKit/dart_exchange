@@ -26,20 +26,16 @@ class Asset {
       if(a.code == code)
         return a;
     }
-    // create new Asset
     var a = new Asset(code, null);
-    // add that Asset to assets
     Asset.assets.add(a);
-    // return that Asset
     return a;
   }
 
+
   pushNewAsset() {
-    if (!include(this.code)) {
-      assets.add(this);
+    if(!include(this.code)) {
+      Asset.assets.add(this);
     }
   }
-
-  toString() => "$code $description";
 
 }
