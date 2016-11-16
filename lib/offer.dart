@@ -8,7 +8,7 @@ class Offer {
   };
 
   Offer({ String ask: null, String bid: null, amount: null, price: null, user: null}) {
-     if (!user.balanceExists(bid) || user.getBalanceByCode(bid).amount <= amount) {
+     if (!user.balanceExists(bid) || user.getBalanceByCode(bid).amount < amount) {
        throw new Exception("Please check you balance");
      }
      else {
@@ -33,5 +33,5 @@ class Offer {
     belongs_to[name] = object;
   }
 
-  toString() => "${belongs_to['user'].name} offers $amount ${ask.code} for $price ${bid.code}";
+  toString() => "${this.belongs_to['user'].name} offers ${this.price} ${this.bid.code} for ${this.amount} ${this.ask.code}";
 }
