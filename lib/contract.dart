@@ -1,5 +1,3 @@
-// import 'balance.dart';
-// import 'asset.dart';
 part of exchange;
 
 class Contract {
@@ -10,8 +8,14 @@ class Contract {
   };
 
   Contract({offer: null, buyer: null}) {
-    this.offer = offer;
-    this.belongs_to["buyer"] = buyer;
+    if (!buyer.balanceExists(offer.ask.code)) {
+      throw new Exception("You don't have balance");
+    } else if (buyer.balanceExists(offer.ask.code) && buyer.getBalanceByCode(offer.ask.code).amount < offer.amount) {
+      throw new Exception("Your ${offer.ask.code} balance is not enough");
+    } else {
+      this.offer = offer;
+      this.belongs_to["buyer"] = buyer;
+    }
   }
 
   get seller => belongs_to["seller"];
@@ -32,51 +36,50 @@ class Contract {
   }
 
   void updateBalances() {
-    // Show initial users data
-    print(this.belongs_to["seller"].associations['balances']);
-    print(this.belongs_to["buyer"].associations['balances']);
-    print(offer);
-    print("----------------------------");
-    // Increase seller wished balance
-      // if wished balance exists
-    if (belongs_to["seller"].balanceExists(offer.bid.code)) {
-      this.belongs_to["seller"].getBalanceByCode(offer.bid).amount += offer.price;
+    increaseSellerAskBalance();
+    increaseBuyerBidBalance();
+
+    decreaseSellerBidBalance();
+    decreaseBuyerAskBalance();
+
+    showInfo();
+  }
+
+  increaseSellerAskBalance() {
+    if(this.offer.user.balanceExists(offer.ask.code)) {
+      this.offer.user.getBalanceByCode(offer.ask.code).amount += offer.price;
     } else {
-      // create new balance for seller
-      var wish_balance = new Balance();
-      wish_balance.asset = new Asset(this.offer.bid.code, this.offer.bid.description);
-      wish_balance.amount = this.offer.price;
-      wish_balance.user = this.belongs_to["seller"];
-      print(wish_balance);
+      var ask_balance = new Balance();
+      ask_balance.amount = this.offer.amount;
     }
-    // Decrease seller proposed balance
-    this.belongs_to["seller"].getBalanceByCode(offer.ask.code).amount -= offer.amount;
+  }
 
-    // Show seller balances
-    print(belongs_to["seller"].getBalanceByCode(offer.ask.code));
-    print("----------------------------");
-
-    // Increase buyer proposed balance
-      // if proposed balance exists
-    if (belongs_to["buyer"].balanceExists(offer.ask.code)) {
-      this.belongs_to["buyer"].getBalanceByCode(offer.ask.code).amount += offer.amount;
-      print(belongs_to["buyer"].getBalanceByCode(offer.ask.code));
+  increaseBuyerBidBalance() {
+    if(this.buyer.balanceExists(this.offer.bid.code)) {
+      this.buyer.getBalanceByCode(this.offer.bid.code).amount += offer.amount;
     } else {
-      // create new balance for buyer
-      var proposed_balance = new Balance();
-      proposed_balance.asset = new Asset(offer.ask.code, offer.ask.description);
-      proposed_balance.amount = offer.amount;
-      proposed_balance.user = this.belongs_to["buyer"];
-      print(proposed_balance);
+    var bid_balance = new Balance();
+    bid_balance.asset = new Asset(this.offer.bid.code, this.offer.bid.description);
+    bid_balance.amount = this.offer.price;
+    bid_balance.user = buyer;
     }
-    // Decrease buyer wished balance
-    belongs_to["buyer"].getBalanceByCode(offer.bid.code).amount -= offer.price;
+  }
 
-    // Show bayer balances
-    print(belongs_to["buyer"].getBalanceByCode(offer.bid.code));
+  decreaseSellerBidBalance() {
+    this.offer.user.getBalanceByCode(this.offer.bid.code).amount -= offer.price;
+  }
 
-    print(this.belongs_to["seller"].associations['balances']);
-    print(this.belongs_to["buyer"].associations['balances']);
+  decreaseBuyerAskBalance() {
+    this.buyer.getBalanceByCode(this.offer.ask.code).amount -= offer.amount;
+  }
+
+  void showInfo() {
+    print(buyer.getBalanceByCode(this.offer.bid.code));
+    print(buyer.getBalanceByCode(this.offer.ask.code));
+    print("---------------------------------------");
+    print(this.offer.user.name);
+    print(this.offer.user.getBalanceByCode(offer.bid.code));
+    print(this.offer.user.getBalanceByCode(offer.ask.code));
   }
 
 }
