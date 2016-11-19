@@ -11,22 +11,20 @@ class Asset {
 
   static var assets = [];
 
-  include(code) {
+  bool include(code) {
     for (var a in assets) {
-      if (a.code == code) {
+      if(a.code == code)
         return true;
-      } else {
-        return false;
-      }
     }
+    return false;
   }
 
-  static Asset find(code) {
+  static Asset find(c) {
     for(var a in Asset.assets) {
-      if(a.code == code)
+      if(a.code == c)
         return a;
     }
-    var a = new Asset(code, null);
+    var a = new Asset(c, null);
     Asset.assets.add(a);
     return a;
   }
