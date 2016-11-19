@@ -7,11 +7,11 @@ class Balance {
     "user" : null
   };
 
-  // Balance({asset: null, amount: null, user: null}) {
-  //   this.asset = Asset.find(asset);
-  //   this.amount = amount;
-  //   this.belongs_to["user"] = user;
-  // }
+  Balance({asset: null, amount: null, user: null}) {
+    this.asset = Asset.find(asset);
+    this.amount = amount;
+    this.belongs_to["user"] = user;
+  }
 
   get user {
     return belongs_to["user"];

@@ -3,12 +3,8 @@ import "../lib/exchange.dart";
 
 void main() {
 
-  var user = new User('Ivan', 'ivan@gmail.com', 'secret');
-  // var balance = new Balance(asset: "usd", amount: 100, user: user);
-  var balance = new Balance();
-  balance.asset = new Asset('usd', 'united states dollar');
-  balance.amount = 100;
-  balance.user = user;
+  var user = new User("Ivan", "ivan@gmail.com", "secret");
+  var balance = new Balance(asset: "usd", amount: 100, user: user);
 
   test("Balance constructor", () {
     expect(balance.asset.code, equals("usd"));
