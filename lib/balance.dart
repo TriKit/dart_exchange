@@ -12,7 +12,7 @@ class Balance {
     this.amount = amount;
     this.belongs_to["user"] = user;
   }
-
+  
   get user {
     return belongs_to["user"];
   }
@@ -26,5 +26,5 @@ class Balance {
     belongs_to[name] = object;
   }
 
-  toString() => "${belongs_to['user'].name} ${asset.code} balance is $amount";
+  // toString() => "${belongs_to['user'].name} ${asset.code} balance is $amount";
 }

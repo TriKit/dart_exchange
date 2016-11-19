@@ -7,17 +7,18 @@ class Offer {
     'user' : null
   };
 
+  // amount - количество продаваемого товара, price - цена за единицу товара
   Offer({ String ask: null, String bid: null, amount: null, price: null, user: null}) {
-     if (!user.balanceExists(bid) || user.getBalanceByCode(bid).amount < amount) {
-       throw new Exception("Please check you balance");
-     }
-     else {
+    //  if (!user.balanceExists(bid) || user.getBalanceByCode(bid).amount < amount*price) {
+    //    throw new Exception("You currentrly have not enough balance");
+    //  }
+    //  else {
        this.ask = Asset.find(ask);
        this.bid = Asset.find(bid);
        this.amount = amount;
        this.price = price;
        this.belongs_to["user"] = user;
-     }
+    //  }
   }
 
   get user {

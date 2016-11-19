@@ -19,7 +19,7 @@ void main() {
     expect(balance.user.name, equals("Ivan"));
   });
 
-  test("toString() returns text representation of balance", (){
-    expect(balance.toString(), equals("Ivan usd balance is 100"));
-  });
+  // test("toString() returns text representation of balance", (){
+  //   expect(balance.toString(), equals("Ivan usd balance is 100"));
+  // });
 }

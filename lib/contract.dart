@@ -10,7 +10,7 @@ class Contract {
   Contract({offer: null, buyer: null}) {
     if (!buyer.balanceExists(offer.ask.code)) {
       throw new Exception("You don't have balance");
-    } else if (buyer.balanceExists(offer.ask.code) && buyer.getBalanceByCode(offer.ask.code).amount < offer.amount) {
+    } else if (buyer.balanceExists(offer.ask.code) && buyer.getBalanceByCode(offer.ask.code).amount < offer.amount*offer.price) {
       throw new Exception("Your ${offer.ask.code} balance is not enough");
     } else {
       this.offer = offer;
@@ -66,11 +66,11 @@ class Contract {
   }
 
   decreaseSellerBidBalance() {
-    this.offer.user.getBalanceByCode(this.offer.bid.code).amount -= offer.price;
+    this.offer.user.getBalanceByCode(this.offer.bid.code).amount -= offer.amount;
   }
 
   decreaseBuyerAskBalance() {
-    this.buyer.getBalanceByCode(this.offer.ask.code).amount -= offer.amount;
+    this.buyer.getBalanceByCode(this.offer.ask.code).amount -= offer.amount*offer.price;
   }
 
   void showInfo() {
