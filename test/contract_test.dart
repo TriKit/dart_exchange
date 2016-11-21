@@ -7,25 +7,20 @@ void main() {
 
   setUp(() {
     seller = new User("John", "john@gmail.com", "secret");
-    // add 10.000 rubles to seller balance
     seller_rub_balance = new Balance(asset: "rub", amount: 7000, user: seller);
 
     buyer = new User("Ivan", "ivan@gmail.com", "secret");
-    // add 1000 dollars to buyer balance
-    buyer_usd_balance =  new Balance(asset: "usd", amount: 100, user: buyer);
+    buyer_usd_balance = new Balance(asset: "usd", amount: 100, user: buyer);
 
-    // Offer from seller to sell 30 dollars for 1900 rubles
-    offer = new Offer(ask: "usd", bid: "rub", amount: 2000, price: 0.015 , user: seller);
-    print(seller.balanceExists(offer.bid.code));
-    // Create last contract
+    offer = new Offer(ask: "usd", bid: "rub", amount: 30, price: 65 , user: seller);
     contract = new Contract(offer: offer, buyer: buyer);
   });
 
   test("Contract constructor", (){
     expect(contract.offer.ask.code, equals("usd"));
     expect(contract.offer.bid.code, equals("rub"));
-    expect(contract.offer.amount, equals(2000));
-    expect(contract.offer.price, equals(0.015));
+    expect(contract.offer.amount, equals(30));
+    expect(contract.offer.price, equals(65));
     expect(contract.offer.user.name, equals("John"));
     expect(contract.buyer.name, equals("Ivan"));
   });

@@ -7,7 +7,7 @@ class Offer {
     'user' : null
   };
 
-  // amount - количество продаваемого товара, price - цена за единицу товара
+  // amount - количество желаемого товара, price - цена за единицу товара в bid
   Offer({ String ask: null, String bid: null, amount: null, price: null, user: null}) {
      if (!user.balanceExists(bid) || user.getBalanceByCode(bid).amount < amount*price) {
        throw new Exception("You currentrly have not enough balance");
