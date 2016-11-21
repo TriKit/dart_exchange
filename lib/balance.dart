@@ -11,8 +11,9 @@ class Balance {
     this.asset = Asset.find(asset);
     this.amount = amount;
     this.belongs_to["user"] = user;
+    this.belongs_to["user"].addBalance(this);
   }
-  
+
   get user {
     return belongs_to["user"];
   }
