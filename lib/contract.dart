@@ -10,11 +10,14 @@ class Contract {
   Contract({offer: null, buyer: null}) {
     if (!buyer.balanceExists(offer.ask.code)) {
       throw new Exception("You don't have balance");
-    } else if (buyer.balanceExists(offer.ask.code) && buyer.getBalanceByCode(offer.ask.code).amount < offer.amount*offer.price) {
+    } else if (buyer.balanceExists(offer.ask.code) && buyer.getBalanceByCode(offer.ask.code).amount < offer.amount) {
       throw new Exception("Your ${offer.ask.code} balance is not enough");
     } else {
       this.offer = offer;
+      this.belongs_to["seller"] = offer.user;
       this.belongs_to["buyer"] = buyer;
+      this.belongs_to["seller"].addContract(this);
+      this.belongs_to["buyer"].addContract(this);
     }
   }
 
