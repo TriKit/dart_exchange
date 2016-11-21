@@ -14,15 +14,15 @@ class User {
   get offers => associations["offers"];
   get contracts => associations["contracts"];
 
-  void addBalance(Balance balance) {
+  void addBalance(Balance object) {
     _addAssociation("balances", object);
   }
 
-  void addOffer(Offer offer) {
+  void addOffer(Offer object) {
     _addAssociation("offers", object);
   }
 
-  void addContract(Contract offer) {
+  void addContract(Contract object) {
     _addAssociation("contracts", object);
   }
 
@@ -41,11 +41,9 @@ class User {
 
   getBalanceByCode(code) {
     for (var balance in associations["balances"]) {
-      if(code == balance.asset.code) {
+      if(code == balance.asset.code)
         return balance;
-      } else {
-        return null;
-      }
     }
+    return null;
   }
 }
