@@ -8,5 +8,5 @@ main() {
   var buyer_balance  = new Balance(asset: "usd", amount: 100, user: buyer);
   var offer          = new Offer(ask: "usd", bid: "rub", amount: 30, price: 65, user: seller);
   var contract       = new Contract(offer: offer, buyer: buyer);
-  // contract.updateBalances();
+  contract.updateBalances();
 }

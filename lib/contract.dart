@@ -49,40 +49,38 @@ class Contract {
   }
 
   increaseSellerAskBalance() {
-    if(this.offer.user.balanceExists(offer.ask.code)) {
-      this.offer.user.getBalanceByCode(offer.ask.code).amount += offer.price;
+    if(this.offer.user.balanceExists(this.offer.ask.code)) {
+      this.offer.user.getBalanceByCode(this.offer.ask.code).amount += this.offer.amount;
     } else {
-      var ask_balance = new Balance();
-      ask_balance.amount = this.offer.amount;
+      new Balance(asset: this.offer.ask.code, amount: this.offer.amount, user: this.offer.user);
     }
   }
 
   increaseBuyerBidBalance() {
     if(this.buyer.balanceExists(this.offer.bid.code)) {
-      this.buyer.getBalanceByCode(this.offer.bid.code).amount += offer.amount;
+      this.buyer.getBalanceByCode(this.offer.bid.code).amount += offer.amount*offer.price;
     } else {
-    var bid_balance = new Balance();
-    bid_balance.asset = new Asset(this.offer.bid.code, this.offer.bid.description);
-    bid_balance.amount = this.offer.price;
-    bid_balance.user = buyer;
+      new Balance(asset: this.offer.bid.code, amount: this.offer.amount*this.offer.price, user: this.buyer);
     }
   }
 
   decreaseSellerBidBalance() {
-    this.offer.user.getBalanceByCode(this.offer.bid.code).amount -= offer.amount;
+    this.offer.user.getBalanceByCode(this.offer.bid.code).amount -= offer.amount*offer.price;
   }
 
   decreaseBuyerAskBalance() {
-    this.buyer.getBalanceByCode(this.offer.ask.code).amount -= offer.amount*offer.price;
+    this.buyer.getBalanceByCode(this.offer.ask.code).amount -= offer.amount;
   }
 
   void showInfo() {
-    print(buyer.getBalanceByCode(this.offer.bid.code));
-    print(buyer.getBalanceByCode(this.offer.ask.code));
-    print("---------------------------------------");
-    print(this.offer.user.name);
-    print(this.offer.user.getBalanceByCode(offer.bid.code));
-    print(this.offer.user.getBalanceByCode(offer.ask.code));
+    print("""
+      ${this.offer}
+      ${this.offer.user.name} ${this.offer.bid.code} balance is ${seller.getBalanceByCode(this.offer.bid.code).amount}
+      ${this.offer.user.name} ${this.offer.ask.code} balance is ${seller.getBalanceByCode(this.offer.ask.code).amount}
+      ------------------------------------
+      ${this.buyer.name} ${this.offer.bid.code} balance is ${this.buyer.getBalanceByCode(this.offer.bid.code).amount}
+      ${this.buyer.name} ${this.offer.ask.code} balance is ${this.buyer.getBalanceByCode(this.offer.ask.code).amount}
+    """);
   }
 
 }
