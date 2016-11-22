@@ -18,8 +18,4 @@ void main() {
     expect(balance.amount, equals(100));
     expect(balance.user.name, equals("Ivan"));
   });
-
-  // test("toString() returns text representation of balance", (){
-  //   expect(balance.toString(), equals("Ivan usd balance is 100"));
-  // });
 }

@@ -3,8 +3,8 @@ import "../lib/exchange.dart";
 
 void main() {
   var asset   = new Asset("usd", "united states dollar");
-  var asset_2 = new Asset("usd", "united states dollar");
-  var asset_3 = new Asset("euro", "eurozone currency");
+  new Asset("usd", "united states dollar");
+  new Asset("euro", "eurozone currency");
 
   test("pushNewAsset() function", () {
     expect(Asset.assets.length, equals(2));

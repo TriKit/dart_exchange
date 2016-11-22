@@ -27,5 +27,4 @@ class Balance {
     belongs_to[name] = object;
   }
 
-  // toString() => "${belongs_to['user'].name} ${asset.code} balance is $amount";
 }
