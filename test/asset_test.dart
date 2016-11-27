@@ -11,7 +11,7 @@ void main() {
   });
 
   group("find() method", () {
-    test("returns existance asset", () {
+    test("returns existence asset", () {
       expect(Asset.find("usd"), equals(asset));
     });
 

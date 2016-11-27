@@ -50,14 +50,14 @@ void main() {
 
   group("updateBalances", () {
 
-    test("increase seller existant balance", () {
+    test("increase seller existent balance", () {
       offer2 = new Offer(ask: "gbp", bid: "wmz", amount: 30, price: 1.5, user: seller);
       contract2 = new Contract(offer: offer2, buyer: buyer);
       contract2.updateBalances();
       expect(seller_gbp_balance.amount, equals(30));
     });
 
-    test("increase buyer existant balance", () {
+    test("increase buyer existent balance", () {
       offer2 = new Offer(ask: "gbp", bid: "wmz", amount: 30, price: 1.5, user: seller);
       contract2 = new Contract(offer: offer2, buyer: buyer);
       contract2.updateBalances();
