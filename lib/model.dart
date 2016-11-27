@@ -2,7 +2,7 @@ part of exchange;
 
 class Model {
   Map properties = { "name" : "SomeName", "password" : "secret" };
-  
+
   Model() {
 
   }
@@ -11,13 +11,18 @@ class Model {
 
   noSuchMethod(Invocation i) {
 
-    var method = MirrorSystem.getName(i.memberName);
+    String method = MirrorSystem.getName(i.memberName);
 
-    if(method.endsWith("=")) {
-      method = method.replaceFirst("=", "");
-      if(properties.containsKey(method))
+    if(method.endsWith("=") && properties.containsKey(method.replaceFirst("=", ""))) {
+        method = method.replaceFirst("=", "");
         properties[method] = i.positionalArguments[0];
     }
+
+    // if(method.endsWith("=")) {
+    //   method = method.replaceFirst("=", "");
+    //   if(properties.containsKey(method))
+    //     properties[method] = i.positionalArguments[0];
+    // }
 
     if(properties.containsKey(method))
       return properties[method];

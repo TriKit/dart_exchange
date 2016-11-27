@@ -8,13 +8,14 @@ void main() {
       expect(model.name, equals("SomeName"));
     });
 
-    test("it throws error if property does't exists", () {
+    test("it throws error if property doesn't exists", () {
       expect(() => new Model().hello, throws);
     });
 
     test("it sets value of existent property", () {
       var model = new Model();
-      expect(model.name = "NewName", equals("NewName"));
+      model.name = "NewName";
+      expect(model.properties["name"], equals("NewName"));
     });
   });
 }
