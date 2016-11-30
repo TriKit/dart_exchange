@@ -1,6 +1,7 @@
 import "exchange.dart";
+// import "dart:io";
 
-main() {
+main() async {
   // var seller = new User("Ivan", "ivan@gmail.com", "secret");
   // var buyer  = new User("John", "john@gmail.com", "secret");
   //
@@ -11,8 +12,10 @@ main() {
   // contract.updateBalances();
 
   var model = new Model();
-
-  print(model.name);
-  print(model.hello = "newName");
-  print(model.hello);
+  model.saveProps("props", "model");
+  // var content = model.loadProperties("props", "test");
+  // print(content);
+  // print(model.name);
+  // print(model.hello = "newName");
+  // print(model.hello);
 }

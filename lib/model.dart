@@ -32,6 +32,15 @@ class Model {
   }
 
   // Создать метод save для сохранения properties в файл
+  Future saveProps(String path, String fileName, {info: null}) {
+    info = JSON.encode(this.properties);
+    return new File("$path/$fileName" + ".json").writeAsString(info);
+  }
   // Load для чтения существующих properties
+
+  // Future loadProperties(String path, String fileName) {
+  //   var content = new File("$path/$fileName" + ".json").readAsString();
+  //   return content;
+  // }
 
 }
