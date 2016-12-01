@@ -29,7 +29,13 @@ void main() {
     });
   });
 
-  // group("loadProps", () {
-  //
-  // });
+  group("loadProps", () {
+    test("it trows error if file does't exist", () {
+      expect(() => model.loadProperties("test/props", "not_a_props"), throws);
+    });
+    test("it loads propreties from file", () {
+      model.loadProperties("test/props", "new_props");
+      expect(model.properties, equals({"name":"NewName","password":"topSecret"}));
+    });
+  });
 }
