@@ -13,8 +13,8 @@ main() async {
 
   var model = new Model();
   model.saveProps("props", "model");
-  // var content = model.loadProperties("props", "test");
-  // print(content);
+  await model.loadProperties("props", "error_props");
+  print(model.properties);
   // print(model.name);
   // print(model.hello = "newName");
   // print(model.hello);

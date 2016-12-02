@@ -31,16 +31,24 @@ class Model {
 
   }
 
-  // Создать метод save для сохранения properties в файл
+  // Save properties to file
   Future saveProps(String path, String fileName, {info: null}) {
-    info = JSON.encode(this.properties);
-    return new File("$path/$fileName" + ".json").writeAsString(info);
+    return new File("$path/$fileName" + ".json").writeAsString(JSON.encode(this.properties));
   }
-  // Load для чтения существующих properties
 
-  // Future loadProperties(String path, String fileName) {
-  //   var content = new File("$path/$fileName" + ".json").readAsString();
-  //   return content;
-  // }
+  // Load для чтения существующих properties
+  loadProperties(String path, String fileName) async {
+    if(FileSystemEntity.typeSync("$path/$fileName" + ".json") != FileSystemEntityType.NOT_FOUND) {
+      await new File("$path/$fileName" + ".json").readAsString().then((String contents) {
+        this.properties = JSON.decode(contents);
+      });
+    } else {
+      throw "Wrong path:$path or file name: $fileName";
+    }
+  }
+
+  assignProperties(map) {
+    this.properties = map;
+  }
 
 }
