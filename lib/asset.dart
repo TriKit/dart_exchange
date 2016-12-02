@@ -31,9 +31,8 @@ class Asset {
 
 
   pushNewAsset() {
-    if(!include(this.code)) {
+    if(!include(this.code))
       Asset.assets.add(this);
-    }
   }
 
 }

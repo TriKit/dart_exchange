@@ -42,9 +42,9 @@ class Model {
       await new File("$path/$fileName" + ".json").readAsString().then((String contents) {
         this.properties = JSON.decode(contents);
       });
-    } else {
-      throw "Wrong path:$path or file name: $fileName";
-    }
+    } else
+        throw "Wrong path:$path or file name: $fileName";
+
   }
 
   assignProperties(map) {
