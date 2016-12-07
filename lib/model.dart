@@ -7,10 +7,10 @@ class Model {
 
   }
 
-  // Упростить if ы
-
+  // Simplifiy if
+  // this is type of objects passed to Object.noSuchMethod when an object
+  // doesn't support the member of invocation that was attempted to
   noSuchMethod(Invocation i) {
-
     String method = MirrorSystem.getName(i.memberName);
 
     if(method.endsWith("=") && properties.containsKey(method.replaceFirst("=", ""))) {
@@ -36,7 +36,7 @@ class Model {
     return new File("$path/$fileName" + ".json").writeAsString(JSON.encode(this.properties));
   }
 
-  // Load для чтения существующих properties
+  // Load properties
   loadProperties(String path, String fileName) async {
     if(FileSystemEntity.typeSync("$path/$fileName" + ".json") != FileSystemEntityType.NOT_FOUND) {
       await new File("$path/$fileName" + ".json").readAsString().then((String contents) {
