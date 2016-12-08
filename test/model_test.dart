@@ -22,23 +22,28 @@ main() {
       model.name = "NewName";
       expect(model.properties["name"], equals("NewName"));
     });
+
+    test("it throws error if property setter doesn't exist", () {
+      expect(() => new Model().hello = "hello", throws);
+    });
   });
 
   group("saveProps", () {
     test("it creates json file in props directory", () {
-      model.saveProps("test/props", "test");
+      model.saveProperties("test/props/test.json");
       expect(FileSystemEntity.typeSync("test/props/test.json") != FileSystemEntityType.NOT_FOUND, equals(true));
     });
   });
 
   group("loadProps", () {
-    // test("it trows error if file doesn't exist", () {
-    //   expect(() => model.loadProperties("test/props", "not_a_props"), throws);
-    // });
+    test("it trows error if file doesn't exist", () {
+      expect(() => model.loadProperties("test/props", "not_a_props"), throws);
+    });
 
-    test("it loads propreties from file", () async {
-      await model.loadProperties("test/props", "new_props");
-      expect(model.properties, equals({"name":"NewName","password":"TopSecret"}));
+    test("it loads propreties from file", () {
+      model.loadProperties("test/props/new_props.json").then((data) {
+        expect(model.properties, equals({"name":"NewName","password":"TopSecret"}));
+      });
     });
   });
 }
