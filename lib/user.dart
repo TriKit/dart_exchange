@@ -1,14 +1,15 @@
 part of exchange;
 
-class User {
-  String name, email, password;
+class User extends Model {
+  Map properties = { "name" : null, "password" : null, "email": null };
+
   Map associations = {
     "balances" : [],
     "offers" : [],
     "contracts" : []
   };
 
-  User(this.name, this.email, this.password);
+  User(properties);
 
   get balances => associations["balances"];
   get offers => associations["offers"];

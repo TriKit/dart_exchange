@@ -12,8 +12,9 @@ main() async {
   // contract.updateBalances();
 
   var model = new Model();
-  model.saveProps("props", "model");
-  await model.loadProperties("props", "error_props");
+  model.saveProps("props/model.json");
+  print(model.properties);
+  await model.loadProperties("props/new_props.json");
   print(model.properties);
   // print(model.name);
   // print(model.hello = "newName");
